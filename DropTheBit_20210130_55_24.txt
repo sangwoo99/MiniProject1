@@ -1,0 +1,115 @@
+
+-- USERS Table Create SQL
+CREATE TABLE USERS
+(
+    `user_no`     INT            NOT NULL    AUTO_INCREMENT COMMENT 'user_no', 
+    `user_pw`     VARCHAR(50)    NULL        COMMENT 'user_pw', 
+    `user_email`  VARCHAR(50)    NULL        COMMENT 'user_email', 
+    `user_pic`    VARCHAR(50)    NULL        COMMENT 'user_pic', 
+    `user_nick`   VARCHAR(50)    NULL        COMMENT 'user_nick', 
+    PRIMARY KEY (user_no)
+);
+
+
+-- USERS Table Create SQL
+CREATE TABLE MUSICS
+(
+    `music_id`   VARCHAR(45)    NOT NULL    COMMENT 'music_id', 
+    `music_pic`  VARCHAR(45)    NULL        COMMENT 'music_pic', 
+    `user_no`    INT            NULL        COMMENT 'user_no', 
+    `genre`      VARCHAR(45)    NULL        COMMENT 'genre', 
+    `title`      VARCHAR(45)    NULL        COMMENT 'title', 
+    `cre_date`   DATE           NULL        COMMENT 'cre_date', 
+    `artist`     VARCHAR(50)    NULL        COMMENT 'artist', 
+    `count`      INT            NULL        COMMENT 'count', 
+    PRIMARY KEY (music_id)
+);
+
+ALTER TABLE MUSICS
+    ADD CONSTRAINT FK_MUSICS_user_no_USERS_user_no FOREIGN KEY (user_no)
+        REFERENCES USERS (user_no) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+
+-- USERS Table Create SQL
+CREATE TABLE PLAYLIST
+(
+    `user_no`        INT            NULL    COMMENT 'user_no', 
+    `music_id`       VARCHAR(45)    NULL    COMMENT 'music_id', 
+    `playlist_name`  VARCHAR(45)    NULL    COMMENT 'playlist_name'
+);
+
+ALTER TABLE PLAYLIST
+    ADD CONSTRAINT FK_PLAYLIST_music_id_MUSICS_music_id FOREIGN KEY (music_id)
+        REFERENCES MUSICS (music_id) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE PLAYLIST
+    ADD CONSTRAINT FK_PLAYLIST_user_no_USERS_user_no FOREIGN KEY (user_no)
+        REFERENCES USERS (user_no) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+
+-- user
+INSERT INTO users(user_no,user_pw,user_email,user_pic,user_nick)
+	VALUES(1001,1111,'aaa@naver.com',111,'삥빵뽕1');
+INSERT INTO users(user_no,user_pw,user_email,user_pic,user_nick)
+	VALUES(1002,1111,'bbb@naver.com',111,'삥빵뽕2');    
+INSERT INTO users(user_no,user_pw,user_email,user_pic,user_nick)
+	VALUES(1003,1111,'ccc@naver.com',111,'삥빵뽕3');
+INSERT INTO users(user_no,user_pw,user_email,user_pic,user_nick)
+	VALUES(1004,1111,'ddd@naver.com',111,'삥빵뽕4');
+INSERT INTO users(user_no,user_pw,user_email,user_pic,user_nick)
+	VALUES(1005,1111,'eee@naver.com',111,'삥빵뽕5');
+    
+-- kpop
+INSERT INTO musics(music_id, music_pic,user_no, genre, title, cre_date, artist, count) 
+	VALUES(101,'닐리리맘보.jpg',1001,'kpop','닐리리맘보','2018-01-01','블락비',4);
+INSERT INTO musics(music_id, music_pic, user_no, genre, title, cre_date, artist, count) 
+	VALUES(102,'오키도키.jpg',1001,'kpop','오키도키','2019-01-01','지코',3);
+INSERT INTO musics(music_id, music_pic, user_no, genre, title, cre_date, artist, count) 
+	VALUES(103,'How You Like That.jpg',1002,'kpop','How You Like That','2020-01-01','BlackPink',9);
+INSERT INTO musics(music_id, music_pic, user_no, genre, title, cre_date, artist, count) 
+	VALUES(104,'Kill This Love.jpg',1002,'kpop','Kill This Love','2019-04-05','BlackPink',10);
+INSERT INTO musics(music_id, music_pic, user_no, genre, title, cre_date, artist, count) 
+	VALUES(105,'Ice Cream.jpg',1002,'kpop','Ice Cream','2021-01-31','BlackPink',8);
+INSERT INTO musics(music_id, music_pic, user_no, genre, title, cre_date, artist, count) 
+	VALUES(106,'dynamite.jpg',1004,'kpop','dynamite','2020-01-01','BTS',11);
+INSERT INTO musics(music_id, music_pic, user_no, genre, title, cre_date, artist, count) 
+	VALUES(107,'ON.jpg',1004,'kpop','ON',now(),'BTS',6);
+INSERT INTO musics(music_id, music_pic, user_no, genre, title, cre_date, artist, count) 
+	VALUES(108,'DNA.jpg',1004,'kpop','DNA','2019-01-01','BTS',5);
+INSERT INTO musics(music_id, music_pic, user_no, genre, title, cre_date, artist, count) 
+	VALUES(109,'Life goes on.jpg',1004,'kpop','Life goes on',now(),'BTS',9);
+    
+-- pop 
+INSERT INTO musics(music_id, music_pic, user_no, genre, title, cre_date, artist, count) 
+	VALUES(110,'Chandelier.jpg',1003,'pop','Chandelier','2021-01-20','Sia',9);
+INSERT INTO musics(music_id, music_pic, user_no, genre, title, cre_date, artist, count) 
+	VALUES(111,'Just the way you are.jpg',1003,'pop','Just the way you are','2015-01-01','Bruno Mars',6);
+INSERT INTO musics(music_id, music_pic, user_no, genre, title, cre_date, artist, count) 
+	VALUES(112,'Perfect.jpg',1005,'pop','Perfect','2017-01-01','Ed Sheeran',9);
+INSERT INTO musics(music_id, music_pic, user_no, genre, title, cre_date, artist, count) 
+	VALUES(113,'Shape of You.jpg',1005,'pop','Shape of You','2017-01-01','Ed Sheeran',11);
+INSERT INTO musics(music_id, music_pic, user_no, genre, title, cre_date, artist, count) 
+	VALUES(114,'Love yourself.jpg',1005,'pop','Love yourself','2016-01-01','Justin Bieber',8);
+INSERT INTO musics(music_id, music_pic, user_no, genre, title, cre_date, artist, count) 
+	VALUES(115,'Someone Like You.jpg',1003,'pop','Someone Like You','2021-01-25','Adele',7);
+INSERT INTO musics(music_id, music_pic, user_no, genre, title, cre_date, artist, count) 
+	VALUES(116,'Rolling in the Deep.jpg',1002,'pop','Rolling in the Deep','2016-01-01','Adele',7);
+INSERT INTO musics(music_id, music_pic, user_no, genre, title, cre_date, artist, count) 
+	VALUES(117,'When We Were Young.jpg',1002,'pop','When We Were Young','2016-01-01','Adele',8);
+INSERT INTO musics(music_id, music_pic, user_no, genre, title, cre_date, artist, count) 
+	VALUES(118,'Set Fire To The Rain.jpg',1003,'pop','Set Fire To The Rain','2016-01-01','Adele',7);
+
+-- 발라드
+INSERT INTO musics(music_id, music_pic, user_no, genre, title, cre_date, artist, count) 
+	VALUES(119,'사계.jpg',1005,'balad','사계','2021-01-25','태연',6);
+INSERT INTO musics(music_id, music_pic, user_no, genre, title, cre_date, artist, count) 
+	VALUES(120,'Rain.jpg',1002,'balad','Rain','2018-01-01','태연',6);
+INSERT INTO musics(music_id, music_pic, user_no, genre, title, cre_date, artist, count) 
+	VALUES(121,'커피 한 잔 할래요.jpg',1005,'balad','커피 한 잔 할래요','2018-01-01','폴킴',5);
+INSERT INTO musics(music_id, music_pic, user_no, genre, title, cre_date, artist, count) 
+	VALUES(122,'모든 날 모든 순간.jpg',1005,'balad','모든 날 모든 순간','2020-01-01','폴킴',6);
+INSERT INTO musics(music_id, music_pic, user_no, genre, title, cre_date, artist, count) 
+	VALUES(123,'너를만나.jpg',1002,'balad','너를만나','2017-01-01','폴킴',7);
+
+  
+
